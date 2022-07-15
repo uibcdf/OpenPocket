@@ -1,0 +1,10 @@
+channels:
+- uibcdf
+- conda-forge
+- defaults
+dependencies:
+- python
+- setuptools
+- numpy
+- pyunitwizard
+- scipy
