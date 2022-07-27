@@ -53,7 +53,6 @@ class AlphaSpheres():
 
         if points is not None:
 
-            ### To be added by Juan Carlos ###
 
             pass # remove this line
 
