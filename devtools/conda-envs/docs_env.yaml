@@ -8,6 +8,7 @@ dependencies:
 - numpy
 - pyunitwizard
 - scipy
+- nglview
 - sphinx
 - sphinx_rtd_theme
 - sphinxcontrib-bibtex

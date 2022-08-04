@@ -15,6 +15,7 @@ production:
     - *setup_dependencies
     - pyunitwizard
     - scipy
+    - nglview
 
 test:
   channels: &test_channels

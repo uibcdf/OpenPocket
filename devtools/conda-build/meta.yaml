@@ -16,6 +16,7 @@ requirements:
   - numpy
   - pyunitwizard
   - scipy
+  - nglview
 about:
   home: https://uibcdf.org
   license: MIT License
