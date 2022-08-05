@@ -110,3 +110,125 @@ class AlphaSpheres():
                 radius = euclidean(self.centers[ii], self.points[self.points_of_alpha_sphere[ii][0]])
                 self.radii.append(radius)
 
+    def remove_alpha_spheres(self, indices):
+
+        """Removing alpha-spheres from the set
+        The method removes from the set those alpha-spheres specified by the input argument
+        `indices`.
+
+        Parameters
+        ----------
+        indices : numpy.ndarray, list or tuple (dtype:ints)
+            List, tuple or numpy.ndarray with the integer numbers corresponding to the alpha-sphere
+            indices to be removed from the set.
+
+        Examples
+        --------
+
+        """
+
+        pass
+
+    def remove_small_alpha_spheres(self, minimum_radius):
+
+        """
+
+        """
+
+        indices_to_remove = np.where(self.radii < minimum_radius)
+        self.remove(indices_to_remove)
+
+
+    def remove_small_alpha_spheres(self, minimum_radius):
+
+            """
+
+            """
+
+            indices_to_remove = np.where(self.radii > minimum_radius)
+            self.remove(indices_to_remove)
+
+    def get_points_of_alpha_spheres(self, indices):
+
+        """Get the points in contact with a subset of alpha-spheres
+        The list of point indices accounting for the points in contact with a subset of alpha-spheres is calculated.
+
+        Parameters
+        ----------
+        indices : numpy.ndarray, list or tuple (dtype:ints)
+            List, tuple or numpy.ndarray with the alpha-sphere indices defining the subset.
+
+        Return
+        ------
+        points_of_alpha_spheres : list
+            List of point indices in contact with one or more alpha-spheres of the subset.
+
+        Examples
+        --------
+        >>> import openpocket as opoc
+        >>> points = ([[-1.,  2.,  0.],
+        >>>            [ 0.,  2.,  1.],
+        >>>            [ 1., -2.,  1.],
+        >>>            [ 0.,  1.,  1.],
+        >>>            [ 0.,  0.,  0.],
+        >>>            [-1., -1.,  0.]])
+        >>> aspheres = opoc.AlphaSpheres(points)
+        >>> aspheres.get_points_of_alpha_spheres([1,3])
+        [0,2,3,4,5]
+
+        """
+
+        pass
+
+    def view(self, indices='all'):
+
+        """3D spatial view of alpha-spheres and points
+        An NGLview view is returned with alpha-spheres (gray color) and points (red color).
+
+        Parameters
+        ----------
+        indices : numpy.ndarray, list or tuple (dtype:ints)
+            List, tuple or numpy.ndarray with the alpha-sphere indices defining the subset.
+
+        Returns
+        -------
+        view : nglview
+            View object of NGLview.
+
+        Examples
+        --------
+        >>> import openpocket as opoc
+        >>> points = ([[-1.,  2.,  0.],
+        >>>            [ 0.,  2.,  1.],
+        >>>            [ 1., -2.,  1.],
+        >>>            [ 0.,  1.,  1.],
+        >>>            [ 0.,  0.,  0.],
+        >>>            [-1., -1.,  0.]])
+        >>> aspheres = opoc.alpha_spheres.AlphaSpheresSet(points)
+        >>> view = aspheres.view([1,3])
+        >>> view
+        """
+
+        import nglview as nv
+
+        view = nv.NGLWidget()
+
+        point_indices = []
+
+        if indices=='all':
+            indices=range(self.n_alpha_spheres)
+            point_indices=range(self.n_points)
+        else:
+            point_indices=self.get_points_of_alpha_spheres(indices)
+
+        for index in point_indices:
+            atom_coordinates = self.points[index,:]
+            view.shape.add_sphere(list(atom_coordinates), [0.8,0.0,0.0], 0.2)
+
+        for index in indices:
+            sphere_coordinates = self.centers[index,:]
+            sphere_radius = self.radii[index]
+            view.shape.add_sphere(list(sphere_coordinates), [0.8,0.8,0.8], sphere_radius)
+
+        return view
+
