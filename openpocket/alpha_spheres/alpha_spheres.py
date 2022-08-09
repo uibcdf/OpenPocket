@@ -110,3 +110,54 @@ class AlphaSpheres():
                 radius = euclidean(self.centers[ii], self.points[self.points_of_alpha_sphere[ii][0]])
                 self.radii.append(radius)
 
+class Remove_alpha_spheres(AlphaSpheres):
+    def __init__(self, in_indices=None):
+        super().__init__()
+        if in_indices is not None:
+            if isinstance(in_indices, (list)):   # I don't know if another type object could work with the remove built-in method
+                pass
+            else:
+                raise ValueError("The argument points needs to be a list object")
+
+            self.in_indices = in_indices     # a way to store the input indices
+            for ix in self.in_indices:
+                if ix in self.points_of_alpha_sphere.index()
+                    self.remove_alpha_spheres =self.points_of_alpha_sphere.remove(ix) # I hope that the indeces given are not nonexistent.
+                else:
+                    raise IndexError("has been using a nonexistent index")
+class Remove_small_alpha_spheres(AlphaSpheres):
+    def __init__(self, small_radius=None):
+        super().__init__()
+        if small_radius is not None:
+            if isinstance(small_radius, (float,int)):   # I don't know wich type objects could work
+                pass
+            elif
+                small_radius = float(small_radius) # I don't know wich type objects could work
+            else:
+                raise ValueError("The argument points needs to be a float or integrer or ¿? type object")
+
+            self.small_radius = small_radius     # a way to store the input indices
+            for ra in self.radii:
+                if ra < small_radius:
+                    self.remove_small_aplha_spheres= self.raddi.remove(ra)
+
+class Remove_big_alpha_spheres(AlphaSpheres):
+    def __init__(self, big_radius=None):
+        super().__init__()
+        if big_radius is not None:
+            if isinstance(big_radius, (float,int)):   # I don't know wich type objects could work
+                pass
+            elif
+                big_radius = float(small_radius) # I don't know wich type objects could work
+            else:
+                raise ValueError("The argument points needs to be a float or integrer or ¿? type object")
+
+            self.big_radius = big_radius     # a way to store the input indices
+            for ra in self.radii:
+                if ra > big_radius:
+                    self.remove_big_aplha_spheres= self.raddi.remove(ra)
+
+            
+            
+            
+
