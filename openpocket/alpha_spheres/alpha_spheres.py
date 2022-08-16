@@ -97,7 +97,6 @@ class AlphaSpheres():
                     for vertex_index in region:
                         if vertex_index != -1:
                             self.points_of_alpha_sphere[vertex_index].append(point_index)
-
             for ii in range(self.n_alpha_spheres):
                 self.points_of_alpha_sphere[ii] = sorted(self.points_of_alpha_sphere[ii])
 
@@ -126,27 +125,44 @@ class AlphaSpheres():
         --------
 
         """
+        if indices is not None:
+        #    if isinstance(indices, (list,np.ndarray,dtype:ints)): 
+            if isinstance(indices, (list,np.ndarray)):
+                pass
+            else:
+                raise ValueError("The argument points needs to be a List, tuple or numpy.ndarray object with the integer numbers corresponding to the alpha-sphere")
 
-        pass
+            self.indices = indices  # a way to store the input indices
+            alpha_sphere_index=[]
+            for ia,alpsp in enumerate(self.points_of_alpha_sphere):
+                alpha_sphere_index.append(ia) 
+            for ix in self.indices:
+#                if ix in alpha_sphere_index:
+                alpha_sphere_index.remove(ix)
+               # remaining=[]
+                self.remove_alpha_spheres=[]
+                for ai in alpha_sphere_index:
+                    self.remove_alpha_spheres.append(self.points_of_alpha_sphere[ai])
+               #     self.remove_alpha_spheres = self.points_of_alpha_sphere[ai]
+               # else:
+               #     raise IndexError("has been using a non existent index")
+
 
     def remove_small_alpha_spheres(self, minimum_radius):
+   
+        if minimum_radius is not None:
+            self.minimum_radius= minimum_radius
+            indices_to_remove = np.where(self.radii < self.minimum_radius)
+            
+            self.remove_small_alpha_spheres=self.remove(indices_to_remove)
 
-        """
 
-        """
+    def remove_big_alpha_spheres(self, maximum_radius):
 
-        indices_to_remove = np.where(self.radii < minimum_radius)
-        self.remove(indices_to_remove)
-
-
-    def remove_small_alpha_spheres(self, minimum_radius):
-
-            """
-
-            """
-
-            indices_to_remove = np.where(self.radii > minimum_radius)
-            self.remove(indices_to_remove)
+        if maximum_radius is not None:
+            self.maximum_radius= maximum_radius
+            indices_to_remove = np.where(self.radii > maximum_radius)
+            self.remove_big_alpha_spheres=self.remove(indices_to_remove)
 
     def get_points_of_alpha_spheres(self, indices):
 
