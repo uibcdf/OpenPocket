@@ -126,35 +126,35 @@ class AlphaSpheres():
 
         """
         if indices is not None:
-        #    if isinstance(indices, (list,np.ndarray,dtype:ints)): 
-            if isinstance(indices, (list,np.ndarray)):
+            if isinstance(indices, (list,np.ndarray,tuple)):
                 pass
             else:
-                raise ValueError("The argument points needs to be a List, tuple or numpy.ndarray object with the integer numbers corresponding to the alpha-sphere")
+                raise ValueError("The input indices needs to be a List, tuple or numpy.ndarray object with the integer numbers corresponding to the alpha-sphere")
+            for ix in indices:
+                point_index.remove(ix)
+            
+            remaining_centers=[]
+            remainig_points_of_alpha_sphere=[]
+            remainig_points=[]
+            for ri in point_index:
+                remaining_centers.append(self.centers[ri])
+                remainig_points_of_alpha_sphere.append(self.points_of_alpha_sphere[ri])
+                remaining_points.append(self.points[ri]) 
+            self.centers=remaining_centers
+            self.n_alpha_spheres = self.centers.shape[0]
+            self.remove_alpha_spheres=remainig_points_of_alpha_sphere
 
-            self.indices = indices  # a way to store the input indices
-            alpha_sphere_index=[]
-            for ia,alpsp in enumerate(self.points_of_alpha_sphere):
-                alpha_sphere_index.append(ia) 
-            for ix in self.indices:
-#                if ix in alpha_sphere_index:
-                alpha_sphere_index.remove(ix)
-               # remaining=[]
-                self.remove_alpha_spheres=[]
-                for ai in alpha_sphere_index:
-                    self.remove_alpha_spheres.append(self.points_of_alpha_sphere[ai])
-               #     self.remove_alpha_spheres = self.points_of_alpha_sphere[ai]
-               # else:
-               #     raise IndexError("has been using a non existent index")
-
-
+            self.radii = []
+            for ii in range(self.n_alpha_spheres):
+                radius = euclidean(self.centers[ii], remaining_points[self.remove_alpha_spheres[ii][0]])
+                self.radii.append(radius)
     def remove_small_alpha_spheres(self, minimum_radius):
    
         if minimum_radius is not None:
             self.minimum_radius= minimum_radius
             indices_to_remove = np.where(self.radii < self.minimum_radius)
-            
-            self.remove_small_alpha_spheres=self.remove(indices_to_remove)
+            for itr in indices_to_remove:
+                self.remove_small_alpha_spheres=self.points_of_alpha_sphere.remove(itr)
 
 
     def remove_big_alpha_spheres(self, maximum_radius):
@@ -162,7 +162,8 @@ class AlphaSpheres():
         if maximum_radius is not None:
             self.maximum_radius= maximum_radius
             indices_to_remove = np.where(self.radii > maximum_radius)
-            self.remove_big_alpha_spheres=self.remove(indices_to_remove)
+            for itr in indices_to_remove:
+                self.remove_big_alpha_spheres=self.points_of_alpha_sphere.remove(itr)
 
     def get_points_of_alpha_spheres(self, indices):
 
