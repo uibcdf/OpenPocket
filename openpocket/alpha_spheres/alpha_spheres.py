@@ -130,8 +130,9 @@ class AlphaSpheres():
                 pass
             else:
                 raise ValueError("The input indices needs to be a List, tuple or numpy.ndarray object with the integer numbers corresponding to the alpha-sphere")
-            for ix in indices:
-                point_index.remove(ix)
+#            for ix in indices:
+#                point_index.remove(ix)
+            point_index.remove(indices)
             
             remaining_centers=[]
             remainig_points_of_alpha_sphere=[]
@@ -153,18 +154,16 @@ class AlphaSpheres():
         if minimum_radius is not None:
             self.minimum_radius= minimum_radius
             indices_to_remove = np.where(self.radii < self.minimum_radius)
-            for itr in indices_to_remove:
-                self.remove_small_alpha_spheres=self.points_of_alpha_sphere.remove(itr)
-
+#            for itr in indices_to_remove:
+            self.remove_small_alpha_spheres=self.points_of_alpha_sphere.remove(indices_to_remove)
 
     def remove_big_alpha_spheres(self, maximum_radius):
 
         if maximum_radius is not None:
             self.maximum_radius= maximum_radius
             indices_to_remove = np.where(self.radii > maximum_radius)
-            for itr in indices_to_remove:
-                self.remove_big_alpha_spheres=self.points_of_alpha_sphere.remove(itr)
-
+#            for itr in indices_to_remove:
+            self.remove_big_alpha_spheres=self.points_of_alpha_sphere.remove(indices_to_remove)
     def get_points_of_alpha_spheres(self, indices):
 
         """Get the points in contact with a subset of alpha-spheres
