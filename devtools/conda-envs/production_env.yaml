@@ -9,3 +9,4 @@ dependencies:
 - pyunitwizard
 - scipy
 - nglview
+- molsysmt

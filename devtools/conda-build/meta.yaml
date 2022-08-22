@@ -17,6 +17,7 @@ requirements:
   - pyunitwizard
   - scipy
   - nglview
+  - molsysmt
 about:
   home: https://uibcdf.org
   license: MIT License
