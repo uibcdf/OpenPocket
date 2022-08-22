@@ -109,6 +109,8 @@ class AlphaSpheres():
                 radius = euclidean(self.centers[ii], self.points[self.points_of_alpha_sphere[ii][0]])
                 self.radii.append(radius)
 
+            self.points_of_alpha_sphere = np.array(self.points_of_alpha_sphere)
+            self.radii = np.array(self.radii)
 
     def remove_alpha_spheres(self, indices):
 
@@ -151,25 +153,25 @@ class AlphaSpheres():
 #                radius = euclidean(self.centers[ii], remaining_points[self.remove_alpha_spheres[ii][0]])
 #                self.radii.append(radius)
 
-        mask = ones([self.n_alpha_spheres], dtype=bool)
+        mask = np.ones([self.n_alpha_spheres], dtype=bool)
         mask[indices] = False
 
         self.centers = self.centers[mask,:]
         self.points_of_alpha_sphere = self.points_of_alpha_sphere[mask,:]
         self.radii = self.radii[mask]
-        self.n_alpha_spheres = np.count(mask)
+        self.n_alpha_spheres = np.count_nonzero(mask)
 
 
     def remove_small_alpha_spheres(self, minimum_radius):
 
         indices_to_remove = np.where(self.radii < minimum_radius)
-        self.remove(indices_to_remove)
+        self.remove_alpha_spheres(indices_to_remove)
 
 
     def remove_big_alpha_spheres(self, maximum_radius):
 
-        indices_to_remove = np.where(self.radii > minimum_radius)
-        self.remove(indices_to_remove)
+        indices_to_remove = np.where(self.radii > maximum_radius)
+        self.remove_alpha_spheres(indices_to_remove)
 
 
     def get_points_of_alpha_spheres(self, indices):
