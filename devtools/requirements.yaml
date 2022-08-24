@@ -16,6 +16,7 @@ production:
     - pyunitwizard
     - scipy
     - nglview
+    - molsysmt
 
 test:
   channels: &test_channels

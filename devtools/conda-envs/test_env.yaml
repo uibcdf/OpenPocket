@@ -9,6 +9,7 @@ dependencies:
 - pyunitwizard
 - scipy
 - nglview
+- molsysmt
 - pytest
 - pip
 - pytest-cov
