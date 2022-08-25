@@ -49,9 +49,9 @@ def test_alphaspheres_original_points():
     
     assert alphaspheres.n_alpha_spheres == 3
 
-    remaining_no_big_raidus = ([1.92028644, 1.6583124 , 1.6583124 ])
+    remaining_no_big_radius = ([1.92028644, 1.6583124 , 1.6583124 ])
     
-    assert np.allclose(remaining_no_big_raidus, alphaspheres.radii)
+    assert np.allclose(remaining_no_big_radius, alphaspheres.radii)
 
     remaining_no_big_centers = ([[-0.25, -0.75,  1.75],
                                 [ 0.5 ,  1.5 , -0.5 ],
@@ -63,9 +63,9 @@ def test_alphaspheres_original_points():
 
     assert alphaspheres.n_alpha_spheres == 1
 
-    remaining_no_small_raidus = ([1.92028644])
+    remaining_no_small_radius = ([1.92028644])
 
-    assert np.allclose(remaining_no_small_raidus, alphaspheres.radii)
+    assert np.allclose(remaining_no_small_radius, alphaspheres.radii)
 
     remaining_no_small_centers= ([[-0.25, -0.75,  1.75]])
 
