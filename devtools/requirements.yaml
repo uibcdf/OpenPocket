@@ -37,6 +37,8 @@ docs:
     - sphinx_rtd_theme
     - sphinxcontrib-bibtex
     - myst-nb
+    - sphinx-copybutton
+    - sphinx-remove-toctrees
 
 development:
   channels:
