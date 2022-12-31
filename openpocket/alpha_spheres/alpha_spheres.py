@@ -129,30 +129,6 @@ class AlphaSpheres():
 
         """
 
-#        if indices is not None:
-#            if isinstance(indices, (list,np.ndarray,tuple)):
-#                pass
-#            else:
-#                raise ValueError("The input indices needs to be a List, tuple or numpy.ndarray object with the integer numbers corresponding to the alpha-sphere")
-#
-#            point_index.remove(indices)
-#            
-#            remaining_centers=[]
-#            remainig_points_of_alpha_sphere=[]
-#            remainig_points=[]
-#            for ri in point_index:
-#                remaining_centers.append(self.centers[ri])
-#                remainig_points_of_alpha_sphere.append(self.points_of_alpha_sphere[ri])
-#                remaining_points.append(self.points[ri]) 
-#            self.centers=remaining_centers
-#            self.n_alpha_spheres = self.centers.shape[0]
-#            self.remove_alpha_spheres=remainig_points_of_alpha_sphere
-#
-#            self.radii = []
-#            for ii in range(self.n_alpha_spheres):
-#                radius = euclidean(self.centers[ii], remaining_points[self.remove_alpha_spheres[ii][0]])
-#                self.radii.append(radius)
-
         mask = np.ones([self.n_alpha_spheres], dtype=bool)
         mask[indices] = False
 
@@ -212,7 +188,7 @@ class AlphaSpheres():
         return list(point_indices)
 
 
-    def view(self, indices='all'):
+    def view(self, view=None, indices='all'):
 
         """3D spatial view of alpha-spheres and points
         An NGLview view is returned with alpha-spheres (gray color) and points (red color).
@@ -241,9 +217,11 @@ class AlphaSpheres():
         >>> view
         """
 
-        import nglview as nv
+        if view is None:
 
-        view = nv.NGLWidget()
+            import nglview as nv
+
+            view = nv.NGLWidget()
 
         point_indices = []
 
