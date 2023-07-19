@@ -54,6 +54,7 @@ def is_permeable_mc(rp, disc1, r1, disc2, r2, disc3, r3, num_tries=500000):
 
     return pasa
 
+
 def is_in_triangle(pp, disc1, disc2, disc3):
 
     A = abs(disc1[0]*(disc2[1]-disc3[1]) + disc2[0]*(disc3[1]-disc1[1]) + disc3[0]*(disc1[1]-disc2[1]))
@@ -63,7 +64,34 @@ def is_in_triangle(pp, disc1, disc2, disc3):
 
     return A==(A1+A2+A3)
 
-def is_permeable(rp, disc1, r1, disc2, r2, disc3, r3):
+
+def is_permeable_2(rp, discs, rs):
+
+    disc1 = discs[0,:]
+    disc2 = discs[1,:]
+
+    r1 = rs[0]
+    r2 = rs[1]
+
+    v12 = disc2-disc1
+    d12 = sqrt(v12[0]**2+v12[1]**2)
+
+    if d12>=r1+r2+2*rp:
+
+        return True
+
+    return False
+
+
+def is_permeable_3(rp, discs, rs):
+
+    disc1 = discs[0,:]
+    disc2 = discs[1,:]
+    disc3 = discs[2,:]
+
+    r1 = rs[0]
+    r2 = rs[1]
+    r3 = rs[2]
 
     disc1, disc2, disc3 = discs_3d_to_2d(disc1, disc2, disc3)
 
@@ -187,4 +215,16 @@ def is_permeable(rp, disc1, r1, disc2, r2, disc3, r3):
             return True
 
     return False
+
+
+def is_permeable_4(rp, discs, rs):
+
+    if is_permeable_3(rp, discs[[0,1,2]], rs[[0,1,2]]):
+        return True
+    elif is_permeable_3(rp, discs[[0,2,3]], rs[[0,2,3]]):
+        return True
+
+    return False
+
+
 
